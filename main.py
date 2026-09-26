@@ -22,13 +22,13 @@ args = parser.parse_args()
 messages = [
     {
         "role": "user",
-        "content": args.user_prompt
+        "content": str(args.user_prompt)
     },
 ]
 
 response = client.chat.completions.create(
     model="openrouter/free",
-    messages=messages,
+    messages=messages,  # pyright: ignore[reportArgumentType]
 )
 
 def main():
