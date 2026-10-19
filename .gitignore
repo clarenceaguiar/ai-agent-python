@@ -1,3 +1,7 @@
 .venv
 venv
 .env
+# Bytecode do Python e pastas de cache
+__pycache__/
+*.py[cod]
+*$py.class
