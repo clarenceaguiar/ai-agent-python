@@ -2,6 +2,7 @@ import os
 import argparse
 from dotenv import load_dotenv
 from openai import OpenAI
+from prompts import system_prompt
 
 load_dotenv()
 api_key = os.environ.get("OPENROUTER_API_KEY")
@@ -20,15 +21,14 @@ parser.add_argument("--verbose", action="store_true", help="Enable verbose outpu
 args = parser.parse_args()
 
 messages = [
-    {
-        "role": "user",
-        "content": str(args.user_prompt)
-    },
+    {"role": "system", "content": system_prompt},
+    {"role": "user", "content": str(args.user_prompt)}
 ]
 
 response = client.chat.completions.create(
     model="openrouter/free",
-    messages=messages,  # pyright: ignore[reportArgumentType]
+    messages=messages,
+    temperature=0
 )
 
 def main():
